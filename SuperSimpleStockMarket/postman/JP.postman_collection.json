@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "cd45af40-7cb5-4b12-85b6-647c5b7bab3a",
+		"name": "JP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Add stock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add stocks",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add trade",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"timestamp\" : \"{{past_timestamp}}\",\n    \"quantity\" : 5,\n    \"buy\" : true,\n    \"price\" : 100.0,\n\t\"stock\" : \"TEA\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/trade",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"trade"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add trades",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{ \n\t    \"timestamp\" : \"{{current_timestamp}}\",\n\t    \"quantity\" : 5,\n\t    \"buy\" : true,\n\t    \"price\" : 100.0,\n\t\t\"stock\" : \"TEA\"\n\t},\n\t{ \n\t    \"timestamp\" : 0,\n\t    \"quantity\" : 5,\n\t    \"buy\" : true,\n\t    \"price\" : 10000.0,\n\t\t\"stock\" : \"TEA\"\n\t},\n\t{ \n\t    \"timestamp\" : \"{{current_timestamp}}\",\n\t    \"quantity\" : 5,\n\t    \"buy\" : true,\n\t    \"price\" : 100.0,\n\t\t\"stock\" : \"POP\"\n\t},\n\t{ \n\t    \"timestamp\" : \"{{current_timestamp}}\",\n\t    \"quantity\" : 1,\n\t    \"buy\" : true,\n\t    \"price\" : 1000.0,\n\t\t\"stock\" : \"ALE\"\n\t},\n\t{ \n\t    \"timestamp\" : \"{{past_timestamp}}\",\n\t    \"quantity\" : 5,\n\t    \"buy\" : true,\n\t    \"price\" : 100.0,\n\t\t\"stock\" : \"ALE\"\n\t},\n\t{ \n\t    \"timestamp\" : \"{{current_timestamp}}\",\n\t    \"quantity\" : 5,\n\t    \"buy\" : true,\n\t    \"price\" : 100.0,\n\t\t\"stock\" : \"GIN\"\n\t},\n\t{ \n\t    \"timestamp\" : \"{{current_timestamp}}\",\n\t    \"quantity\" : 5,\n\t    \"buy\" : true,\n\t    \"price\" : 100.0,\n\t\t\"stock\" : \"JOE\"\n\t},\n\t{ \n\t    \"timestamp\" : \"{{current_timestamp}}\",\n\t    \"quantity\" : 10,\n\t    \"buy\" : true,\n\t    \"price\" : 300.0,\n\t\t\"stock\" : \"JOE\"\n\t}\n]"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/trades",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"trades"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "calculate dividend",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f651400-b24c-483d-9ebf-b2d4ee872226",
+						"exec": [
+							"var current_timestamp = new Date();",
+							"postman.setEnvironmentVariable(\"current_timestamp\", current_timestamp.toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"price\" : 100.0,\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/stock/TEA/dividend-yield/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"stock",
+						"TEA",
+						"dividend-yield",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "calculate volume weighted",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f651400-b24c-483d-9ebf-b2d4ee872226",
+						"exec": [
+							"var current_timestamp = new Date();",
+							"postman.setEnvironmentVariable(\"current_timestamp\", current_timestamp.toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"price\" : 100.0,\n\t\"symbol\" : \"TEA\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/stock/dividend-yield/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"stock",
+						"dividend-yield",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "calculate geometric mean",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f651400-b24c-483d-9ebf-b2d4ee872226",
+						"exec": [
+							"var current_timestamp = new Date();",
+							"postman.setEnvironmentVariable(\"current_timestamp\", current_timestamp.toISOString());",
+							"",
+							"var past_timestamp = new Date();",
+							"if ( past_timestamp.getHours() - 1 > 0 ){",
+							"    past_timestamp.setHours(past_timestamp.getHours() - 1)",
+							"} else {",
+							"    past_timestamp.setDate(past_timestamp.getDate() - 1)",
+							"    past_timestamp.setHours(23)",
+							"    past_timestamp.setMinutes(44)",
+							"}",
+							"postman.setEnvironmentVariable(\"past_timestamp\", past_timestamp.toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"price\" : 100.0,\n\t\"symbol\" : \"TEA\"\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/stock/geometric-mean",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"stock",
+						"geometric-mean"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "calculate pe ratio",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8f651400-b24c-483d-9ebf-b2d4ee872226",
+						"exec": [
+							"var current_timestamp = new Date();",
+							"postman.setEnvironmentVariable(\"current_timestamp\", current_timestamp.toISOString());"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n    \"price\" : 100.0,\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8080/stock/TEA/pe-rate/100",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"stock",
+						"TEA",
+						"pe-rate",
+						"100"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
